@@ -1,5 +1,6 @@
 # IntelliJ / CLion
 .idea/
+*.iml
 cmake-build-*/
 out/
 
