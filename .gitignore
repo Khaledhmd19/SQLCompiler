@@ -1,0 +1,15 @@
+# IntelliJ / CLion
+.idea/
+cmake-build-*/
+out/
+
+# Build artifacts
+*.class
+*.jar
+
+# ANTLR generated code
+gen/
+
+# OS files
+.DS_Store
+Thumbs.db
