@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.Token;
 public class mysqllexertest {
     public static void main(String[] args) throws Exception {
 
-        String filePath = "sqlInput.txt";
+        String filePath = "test.txt";
 
 
         CharStream input = CharStreams.fromFileName(filePath);

@@ -7,9 +7,6 @@ out/
 *.class
 *.jar
 
-# ANTLR generated code
-gen/
-
 # OS files
 .DS_Store
 Thumbs.db

@@ -1,18 +1,21 @@
 -- Test SELECT query
+INSERT INTO logs(text) VALUES ('Hello\n\rWorldTest');
+INSERT INTO flags (bits) VALUES (B'1101');
+INSERT INTO products (color) VALUES (0xABCDEF123);
 SELECT name, age, salary
 FROM employees
 WHERE id = 10
-  AND salary > 5000.75
+  AND salary >= 5000.75
   AND active = TRUE;
 
 /* Insert test */
 INSERT INTO accounts (username, password, balance)
-VALUES ('khaled', 'mypassword', 1200.50);
+VALUES ('kha\nled', 'mypassword', 1200.50);
 
 /* Update test */
 UPDATE accounts
 SET balance = balance + 250
-WHERE username = 'khaled';
+-- WHERE username = 'khaled';
 
 /* String test with escape */
 SELECT 'hello ''world''' AS greeting;

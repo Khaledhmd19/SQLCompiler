@@ -1,127 +1,177 @@
 lexer grammar mysqllexer;
 
-// keywords
-ADD: [aA][dD][dD];
-ALL: [aA][lL][lL];
-ALTER: [aA][lL][tT][eE][rR];
-AND: [aA][nN][dD];
-ANY: [aA][nN][yY];
-AS: [aA][sS];
-ASC: [aA][sS][cC];
-BETWEEN: [bB][eE][tT][wW][eE][eE][nN];
-BY: [bB][yY];
-CASE: [cC][aA][sS][eE];
-CHECK: [cC][hH][eE][cC][kK];
-COLUMN: [cC][oO][lL][uU][mM][nN];
-CONSTRAINT: [cC][oO][nN][sS][tT][rR][aA][iI][nN][tT];
-CREATE: [cC][rR][eE][aA][tT][eE];
-DATABASE: [dD][aA][tT][aA][bB][aA][sS][eE];
-DEFAULT: [dD][eE][fF][aA][uU][lL][tT];
-DELETE: [dD][eE][lL][eE][tT][eE];
-DESC: [dD][eE][sS][cC];
-DISTINCT: [dD][iI][sS][tT][iI][nN][cC][tT];
-DROP: [dD][rR][oO][pP];
-ELSE: [eE][lL][sS][eE];
-END: [eE][nN][dD];
-EXISTS: [eE][xX][iI][sS][tT][sS];
-FALSE: [fF][aA][lL][sS][eE];
-FOREIGN: [fF][oO][rR][eE][iI][gG][nN];
-FROM: [fF][rR][oO][mM];
-GROUP: [gG][rR][oO][uU][pP];
-HAVING: [hH][aA][vV][iI][nN][gG];
-IN: [iI][nN];
-INDEX: [iI][nN][dD][eE][xX];
-INNER: [iI][nN][nN][eE][rR];
-INSERT: [iI][nN][sS][eE][rR][tT];
-INTO: [iI][nN][tT][oO];
-IS: [iI][sS];
-JOIN: [jJ][oO][iI][nN];
-KEY: [kK][eE][yY];
-LEFT: [lL][eE][fF][tT];
-LIKE: [lL][iI][kK][eE];
-LIMIT: [lL][iI][mM][iI][tT];
-NOT: [nN][oO][tT];
-NULL: [nN][uU][lL][lL];
-ON: [oO][nN];
-OR: [oO][rR];
-ORDER: [oO][rR][dD][eE][rR];
-OUTER: [oO][uU][tT][eE][rR];
-PRIMARY: [pP][rR][iI][mM][aA][rR][yY];
-REFERENCES: [rR][eE][fF][eE][rR][eE][nN][cC][eE][sS];
-RIGHT: [rR][iI][gG][hH][tT];
-SELECT: [sS][eE][lL][eE][cC][tT];
-SET: [sS][eE][tT];
-TABLE: [tT][aA][bB][lL][eE];
-THEN: [tT][hH][eE][nN];
-TRUE: [tT][rR][uU][eE];
-UNION: [uU][nN][iI][oO][nN];
-UNIQUE: [uU][nN][iI][qQ][uU][eE];
-UPDATE: [uU][pP][dD][aA][tT][eE];
-VALUES: [vV][aA][lL][uU][eE][sS];
-WHERE: [wW][hH][eE][rR][eE];
+// --------------------------------------
+// Fragments
+// --------------------------------------
+fragment A : [aA];
+fragment B : [bB];
+fragment C : [cC];
+fragment D : [dD];
+fragment E : [eE];
+fragment F : [fF];
+fragment G : [gG];
+fragment H : [hH];
+fragment I : [iI];
+fragment J : [jJ];
+fragment K : [kK];
+fragment L : [lL];
+fragment M : [mM];
+fragment N : [nN];
+fragment O : [oO];
+fragment P : [pP];
+fragment Q : [qQ];
+fragment R : [rR];
+fragment S : [sS];
+fragment T : [tT];
+fragment U : [uU];
+fragment V : [vV];
+fragment W : [wW];
+fragment X : [xX];
+fragment Y : [yY];
+fragment Z : [zZ];
 
-//symbols
-ASSIGN: ':=';
-COMMA: ',';
-CONCAT: '||';
-DOT: '.';
-EQ: '=';
-GTE: '>=';
-GT: '>';
-LBRACKET: '[';
-LPAREN: '(';
-LTE: '<=';
-LT: '<';
-MINUS: '-';
-NEQ: '<>' | '!=';
-PERCENT: '%';
-PLUS: '+';
-RBRACKET: ']';
-RPAREN: ')';
-SEMI: ';';
-SLASH: '/';
-STAR: '*';
+fragment LETTER : [a-zA-Z_];
+fragment DIGIT  : [0-9];
+fragment SQ : '\'';
 
-//identifiers
-ID: [a-zA-Z_][a-zA-Z0-9_]*;
 
-//litirals
-INT: [0-9]+;
+// --------------------------------------
+// Keywords (case-insensitive)
+// --------------------------------------
 
-DECIMAL
-    : [0-9]+ '.' [0-9]+
+ADD         : A D D;
+ALL         : A L L;
+ALTER       : A L T E R;
+AND         : A N D;
+ANY         : A N Y;
+AS          : A S;
+ASC         : A S C;
+BETWEEN     : B E T W E E N;
+BY          : B Y;
+CASE        : C A S E;
+CHECK       : C H E C K;
+COLUMN      : C O L U M N;
+CONSTRAINT  : C O N S T R A I N T;
+CREATE      : C R E A T E;
+DATABASE    : D A T A B A S E;
+DEFAULT     : D E F A U L T;
+DELETE      : D E L E T E;
+DESC        : D E S C;
+DISTINCT    : D I S T I N C T;
+DROP        : D R O P;
+ELSE        : E L S E;
+END         : E N D;
+EXISTS      : E X I S T S;
+FALSE       : F A L S E;
+FOREIGN     : F O R E I G N;
+FROM        : F R O M;
+GROUP       : G R O U P;
+HAVING      : H A V I N G;
+IN          : I N;
+INDEX       : I N D E X;
+INNER       : I N N E R;
+INSERT      : I N S E R T;
+INTO        : I N T O;
+IS          : I S;
+JOIN        : J O I N;
+KEY         : K E Y;
+LEFT        : L E F T;
+LIKE        : L I K E;
+LIMIT       : L I M I T;
+NOT         : N O T;
+NULL        : N U L L;
+ON          : O N;
+OR          : O R;
+ORDER       : O R D E R;
+OUTER       : O U T E R;
+PRIMARY     : P R I M A R Y;
+REFERENCES  : R E F E R E N C E S;
+RIGHT       : R I G H T;
+SELECT      : S E L E C T;
+SET         : S E T;
+TABLE       : T A B L E;
+THEN        : T H E N;
+TRUE        : T R U E;
+UNION       : U N I O N;
+UNIQUE      : U N I Q U E;
+UPDATE      : U P D A T E;
+VALUES      : V A L U E S;
+WHERE       : W H E R E;
+
+
+// --------------------------------------
+// Symbols
+// --------------------------------------
+
+ASSIGN      : ':=';
+COMMA       : ',';
+CONCAT      : '||';
+DOT         : '.';
+EQ          : '=';
+GTE         : '>=';
+GT          : '>';
+LBRACKET    : '[';
+LPAREN      : '(';
+LTE         : '<=';
+LT          : '<';
+MINUS       : '-';
+NEQ         : '<>' | '!=';
+PERCENT     : '%';
+PLUS        : '+';
+RBRACKET    : ']';
+RPAREN      : ')';
+SEMI        : ';';
+SLASH       : '/';
+STAR        : '*';
+
+
+// --------------------------------------
+// Identifiers
+// --------------------------------------
+
+ID : LETTER (LETTER | DIGIT)*;
+
+
+// --------------------------------------
+// Literals
+// --------------------------------------
+
+HEX_STRING
+    : '0' [xX] [0-9A-Fa-f]+ ( '\\' [ \t]* [\r\n] [0-9A-Fa-f]+ )*
     ;
 
-FLOAT
-    : [0-9]+ ('.' [0-9]+)? [eE] [+-]? [0-9]+
-    ;
+BIT_STRING : B '\'' [01]+ '\'';
+
+INT : DIGIT+;
+
+DECIMAL : DIGIT+ '.' DIGIT+;
+
+FLOAT : DIGIT+ ('.' DIGIT+)? [eE] [+-]? DIGIT+;
 
 STRING
     : '\'' ( '\'\'' | ~'\'' )* '\''
     ;
 
-HEX_STRING
-: [xX] '\'' [0-9A-Fa-f]+ '\''
-;
-
-BIT_STRING : [bB] '\'' [01]+ '\'' ;
 
 
-//whitespace
-WS: [ \t\r\n]+ -> skip;
+// --------------------------------------
+// Comments & whitespace
+// --------------------------------------
 
-//comments
-LINE_COMMENT
-    : '--' ~[\r\n]* -> skip
-    ;
+WS : [ \t\r\n]+ -> skip;
 
-BLOCK_COMMENT
-    : '/*' .*? '*/' -> skip
-    ;
+LINE_COMMENT : '--' ~[\r\n]* -> skip;
+
+BLOCK_COMMENT : '/*' .*? '*/' -> skip;
+
+
+// --------------------------------------
+// Variables
+// --------------------------------------
 
 USER_VAR
-    : '@' [a-zA-Z_][a-zA-Z0-9_]*       // @var
-    | '@' '`' ~'`'+ '`'               // @`var name`
+    : '@' LETTER (LETTER | DIGIT)*
+    | '@' '`' ~'`'+ '`'
     ;
 
-SYSTEM_VAR : '@@' [a-zA-Z0-9_.]+ ;
+SYSTEM_VAR : '@@' [a-zA-Z0-9_.]+;
