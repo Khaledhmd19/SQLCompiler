@@ -129,6 +129,13 @@ STAR        : '*';
 // Identifiers
 // --------------------------------------
 
+// Bracketed identifiers (SQL Server/T-SQL style) - can contain any char including quotes
+BRACKETED_ID : '[' ~[\]]* ']';
+
+// Double-quoted identifiers (standard SQL)
+DQUOTE_ID : '"' ( '""' | ~'"' )* '"';
+
+// Regular identifiers
 ID : LETTER (LETTER | DIGIT)*;
 
 
