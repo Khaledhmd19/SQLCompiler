@@ -123,6 +123,7 @@ MATCHED        : M A T C H E D;
 ADD        : A D D;
 TO        : T O;
 FOR        : F O R;
+INT        : I N T;
 
 
 // Aggregates / Functions
@@ -180,7 +181,7 @@ HEX_STRING
 
 BIT_STRING : B '\'' [01]+ '\'';
 
-INT : DIGIT+;
+INTEGER : DIGIT+;
 
 DECIMAL : DIGIT+ '.' DIGIT+;
 

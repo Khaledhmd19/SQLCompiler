@@ -427,6 +427,16 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 */
 	void exitLiteral(mysqlparser.LiteralContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link mysqlparser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(mysqlparser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(mysqlparser.IdentifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link mysqlparser#tableName}.
 	 * @param ctx the parse tree
 	 */

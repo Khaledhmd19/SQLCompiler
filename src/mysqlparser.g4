@@ -245,10 +245,14 @@ literal
 // ======================================
 // Identifiers
 // ======================================
-tableName
+identifier
     : ID
     ;
 
+tableName
+    : identifier
+    ;
+
 columnName
-    : ID
+    : identifier
     ;

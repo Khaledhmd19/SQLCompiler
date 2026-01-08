@@ -6,7 +6,7 @@ import org.antlr.v4.gui.Trees;
 public class mysqllexertest {
     public static void main(String[] args) throws Exception {
 
-        String filePath = "parser_test_input.txt";
+        String filePath = "testttt.txt";
 
         CharStream input =  CharStreams.fromFileName(filePath);
 

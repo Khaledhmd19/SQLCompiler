@@ -262,6 +262,12 @@ public interface mysqlparserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLiteral(mysqlparser.LiteralContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link mysqlparser#identifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier(mysqlparser.IdentifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link mysqlparser#tableName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
