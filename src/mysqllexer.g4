@@ -1,5 +1,10 @@
 lexer grammar mysqllexer;
 
+@header {
+package parser;
+}
+
+
 // --------------------------------------
 // Fragments
 // --------------------------------------
@@ -32,8 +37,6 @@ fragment Z : [zZ];
 
 fragment LETTER : [a-zA-Z_];
 fragment DIGIT  : [0-9];
-fragment SQ : '\'';
-
 
 // --------------------------------------
 // Keywords (case-insensitive)
@@ -66,7 +69,6 @@ CREATE      : C R E A T E;
 ALTER       : A L T E R;
 DROP        : D R O P;
 TRUNCATE    : T R U N C A T E;
-RENAME      : R E N A M E;
 TABLE       : T A B L E;
 VIEW        : V I E W;
 INDEX       : I N D E X;
@@ -76,26 +78,6 @@ CONSTRAINT  : C O N S T R A I N T;
 REFERENCES  : R E F E R E N C E S;
 DATABASE    : D A T A B A S E;
 
-// Joins
-INNER       : I N N E R;
-LEFT        : L E F T;
-RIGHT       : R I G H T;
-FULL        : F U L L;
-CROSS       : C R O S S;
-OUTER       : O U T E R;
-
-// Cursor Manipulation
-DECLARE     : D E C L A R E;
-CURSOR      : C U R S O R;
-OPEN        : O P E N;
-FETCH       : F E T C H;
-CLOSE       : C L O S E;
-DEALLOCATE  : D E A L L O C A T E;
-NEXT        : N E X T;
-
-// CTE
-WITH        : W I T H;
-
 // Boolean & logic
 AND         : A N D;
 OR          : O R;
@@ -103,44 +85,21 @@ NOT         : N O T;
 TRUE        : T R U E;
 FALSE       : F A L S E;
 NULL        : N U L L;
-EXISTS      : E X I S T S;
 
 // Other
 LIKE        : L I K E;
 IN          : I N;
-ALL         : A L L;
-ANY         : A N Y;
 BETWEEN     : B E T W E E N;
-CASE        : C A S E;
-WHEN        : W H E N;
-THEN        : T H E N;
-ELSE        : E L S E;
-END         : E N D;
-ASC         : A S C;
-DESC        : D E S C;
-USING        : U S I N G;
-MATCHED        : M A T C H E D;
-ADD        : A D D;
-TO        : T O;
-FOR        : F O R;
-INT        : I N T;
 
-
-// Aggregates / Functions
-COUNT       : C O U N T;
-SUM         : S U M;
-AVG         : A V G;
-MIN         : M I N;
-MAX         : M A X;
-
+// Data types (SQL Server)
+INT_TYPE        : I N T;
+VARCHAR_TYPE    : V A R C H A R;
 
 // --------------------------------------
 // Symbols
 // --------------------------------------
 
-ASSIGN      : ':=';
 COMMA       : ',';
-CONCAT      : '||';
 DOT         : '.';
 EQ          : '=';
 NEQ         : '<>' | '!=';
@@ -152,65 +111,77 @@ PLUS        : '+';
 MINUS       : '-';
 STAR        : '*';
 SLASH       : '/';
-PERCENT_OP  : '%';
 LPAREN      : '(';
 RPAREN      : ')';
-LBRACKET    : '[';
-RBRACKET    : ']';
 SEMI        : ';';
-
 
 // --------------------------------------
 // Identifiers
 // --------------------------------------
 
-BRACKETED_ID : '[' ~[\]]* ']';
-
-DQUOTE_ID : '"' ( '""' | ~'"' )* '"';
+BRACKETED_ID : '[' ~[\]]+ ']';
+DQUOTE_ID    : '"' ( '""' | ~'"' )* '"';
 
 ID : LETTER (LETTER | DIGIT)*;
-
 
 // --------------------------------------
 // Literals
 // --------------------------------------
 
-HEX_STRING
-    : '0' X [0-9A-Fa-f]+ ( '\\' [ \t]* [\r\n] [0-9A-Fa-f]+ )*
+INT_LITERAL
+    : DIGIT+
     ;
 
-BIT_STRING : B '\'' [01]+ '\'';
+DECIMAL_LITERAL
+    : DIGIT+ '.' DIGIT+
+    ;
 
-INTEGER : DIGIT+;
+FLOAT_LITERAL
+    : DIGIT+ ('.' DIGIT+)? [eE] [+-]? DIGIT+
+    ;
 
-DECIMAL : DIGIT+ '.' DIGIT+;
-
-FLOAT : DIGIT+ ('.' DIGIT+)? [eE] [+-]? DIGIT+;
-
-STRING
+STRING_LITERAL
     : '\'' ( '\'\'' | ~'\'' )* '\''
     ;
 
-
-
 // --------------------------------------
-// Comments & whitespace
-// --------------------------------------
-
-WS : [ \t\r\n]+ -> skip;
-
-LINE_COMMENT : '--' ~[\r\n]* -> skip;
-
-BLOCK_COMMENT : '/*' .*? '*/' -> skip;
-
-
-// --------------------------------------
-// Variables
+// Variables (T-SQL)
 // --------------------------------------
 
 USER_VAR
     : '@' LETTER (LETTER | DIGIT)*
-    | '@' '`' ~'`'+ '`'
     ;
 
-SYSTEM_VAR : '@@' [a-zA-Z0-9_.]+;
+SYSTEM_VAR
+    : '@@' [a-zA-Z0-9_.]+
+    ;
+
+// --------------------------------------
+// Whitespace & comments
+// --------------------------------------
+
+WS : [ \t\r\n]+ -> skip;
+
+LINE_COMMENT
+    : '--' ~[\r\n]* -> skip
+    ;
+
+// -------- NESTED BLOCK COMMENTS --------
+
+BLOCK_COMMENT_START
+    : '/*' -> pushMode(COMMENT), skip
+    ;
+
+mode COMMENT;
+
+COMMENT_START
+    : '/*' -> pushMode(COMMENT), skip
+    ;
+
+COMMENT_END
+    : '*/' -> popMode, skip
+    ;
+
+COMMENT_TEXT
+    : . -> skip
+    ;

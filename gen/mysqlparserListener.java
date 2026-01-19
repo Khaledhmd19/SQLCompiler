@@ -1,4 +1,7 @@
 // Generated from C:/Users/KMHam/IdeaProjects/sql_compiler_lexer/src/mysqlparser.g4 by ANTLR 4.13.2
+
+package parser;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -47,16 +50,6 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 */
 	void exitSelectStatement(mysqlparser.SelectStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link mysqlparser#selectClause}.
-	 * @param ctx the parse tree
-	 */
-	void enterSelectClause(mysqlparser.SelectClauseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#selectClause}.
-	 * @param ctx the parse tree
-	 */
-	void exitSelectClause(mysqlparser.SelectClauseContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link mysqlparser#selectList}.
 	 * @param ctx the parse tree
 	 */
@@ -86,16 +79,6 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFromClause(mysqlparser.FromClauseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#tableSource}.
-	 * @param ctx the parse tree
-	 */
-	void enterTableSource(mysqlparser.TableSourceContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#tableSource}.
-	 * @param ctx the parse tree
-	 */
-	void exitTableSource(mysqlparser.TableSourceContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link mysqlparser#whereClause}.
 	 * @param ctx the parse tree
@@ -177,16 +160,6 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 */
 	void exitTruncateStatement(mysqlparser.TruncateStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link mysqlparser#mergeStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterMergeStatement(mysqlparser.MergeStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#mergeStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitMergeStatement(mysqlparser.MergeStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link mysqlparser#ddlStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -237,16 +210,6 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 */
 	void exitDropStatement(mysqlparser.DropStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link mysqlparser#renameStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterRenameStatement(mysqlparser.RenameStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#renameStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitRenameStatement(mysqlparser.RenameStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link mysqlparser#columnDef}.
 	 * @param ctx the parse tree
 	 */
@@ -266,86 +229,6 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDataType(mysqlparser.DataTypeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#cursorStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterCursorStatement(mysqlparser.CursorStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#cursorStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitCursorStatement(mysqlparser.CursorStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#declareCursor}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclareCursor(mysqlparser.DeclareCursorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#declareCursor}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclareCursor(mysqlparser.DeclareCursorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#openCursor}.
-	 * @param ctx the parse tree
-	 */
-	void enterOpenCursor(mysqlparser.OpenCursorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#openCursor}.
-	 * @param ctx the parse tree
-	 */
-	void exitOpenCursor(mysqlparser.OpenCursorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#fetchCursor}.
-	 * @param ctx the parse tree
-	 */
-	void enterFetchCursor(mysqlparser.FetchCursorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#fetchCursor}.
-	 * @param ctx the parse tree
-	 */
-	void exitFetchCursor(mysqlparser.FetchCursorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#closeCursor}.
-	 * @param ctx the parse tree
-	 */
-	void enterCloseCursor(mysqlparser.CloseCursorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#closeCursor}.
-	 * @param ctx the parse tree
-	 */
-	void exitCloseCursor(mysqlparser.CloseCursorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#deallocateCursor}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeallocateCursor(mysqlparser.DeallocateCursorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#deallocateCursor}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeallocateCursor(mysqlparser.DeallocateCursorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#cteStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterCteStatement(mysqlparser.CteStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#cteStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitCteStatement(mysqlparser.CteStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#cteDefinition}.
-	 * @param ctx the parse tree
-	 */
-	void enterCteDefinition(mysqlparser.CteDefinitionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#cteDefinition}.
-	 * @param ctx the parse tree
-	 */
-	void exitCteDefinition(mysqlparser.CteDefinitionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link mysqlparser#expression}.
 	 * @param ctx the parse tree
@@ -426,16 +309,6 @@ public interface mysqlparserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLiteral(mysqlparser.LiteralContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link mysqlparser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifier(mysqlparser.IdentifierContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mysqlparser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifier(mysqlparser.IdentifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link mysqlparser#tableName}.
 	 * @param ctx the parse tree

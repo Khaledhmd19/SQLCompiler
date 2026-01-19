@@ -1,5 +1,9 @@
 parser grammar mysqlparser;
 
+@header {
+package parser;
+}
+
 options {
     tokenVocab = mysqllexer;
 }
@@ -17,8 +21,6 @@ sqlFile
 statement
     : dmlStatement SEMI?
     | ddlStatement SEMI?
-    | cursorStatement SEMI?
-    | cteStatement SEMI?
     ;
 
 // ======================================
@@ -30,16 +32,11 @@ dmlStatement
     | updateStatement
     | deleteStatement
     | truncateStatement
-    | mergeStatement
     ;
 
 // SELECT
 selectStatement
-    : selectClause fromClause? whereClause? groupByClause? orderByClause?
-    ;
-
-selectClause
-    : SELECT selectList
+    : SELECT selectList fromClause? whereClause? groupByClause? orderByClause?
     ;
 
 selectList
@@ -52,11 +49,7 @@ selectItem
     ;
 
 fromClause
-    : FROM tableSource (COMMA tableSource)*
-    ;
-
-tableSource
-    : tableName (AS? ID)?
+    : FROM tableName (COMMA tableName)*
     ;
 
 whereClause
@@ -92,20 +85,12 @@ assignment
 
 // DELETE
 deleteStatement
-    : DELETE FROM tableName
-      whereClause?
+    : DELETE FROM tableName whereClause?
     ;
 
 // TRUNCATE
 truncateStatement
     : TRUNCATE TABLE tableName
-    ;
-
-// MERGE (simplified version)
-mergeStatement
-    : MERGE INTO tableName USING tableName ON expression
-      WHEN MATCHED THEN updateStatement
-      WHEN NOT MATCHED THEN insertStatement
     ;
 
 // ======================================
@@ -115,11 +100,11 @@ ddlStatement
     : createStatement
     | alterStatement
     | dropStatement
-    | renameStatement
     ;
 
 createStatement
-    : CREATE TABLE tableName LPAREN columnDef (COMMA columnDef)* RPAREN
+    : CREATE TABLE tableName
+      LPAREN columnDef (COMMA columnDef)* RPAREN
     ;
 
 alterStatement
@@ -129,15 +114,10 @@ alterStatement
 alterAction
     : ADD columnDef
     | DROP columnName
-    | ALTER columnName dataType
     ;
 
 dropStatement
     : DROP TABLE tableName
-    ;
-
-renameStatement
-    : RENAME TABLE tableName TO tableName
     ;
 
 columnDef
@@ -145,53 +125,12 @@ columnDef
     ;
 
 dataType
-    : ID           // INT, VARCHAR, DATE, etc.
+    : INT_TYPE
+    | VARCHAR_TYPE
     ;
 
 // ======================================
-// Cursor Manipulation Statements
-// ======================================
-cursorStatement
-    : declareCursor
-    | openCursor
-    | fetchCursor
-    | closeCursor
-    | deallocateCursor
-    ;
-
-declareCursor
-    : DECLARE ID CURSOR FOR selectStatement
-    ;
-
-openCursor
-    : OPEN ID
-    ;
-
-fetchCursor
-    : FETCH NEXT FROM ID INTO columnName (COMMA columnName)*
-    ;
-
-closeCursor
-    : CLOSE ID
-    ;
-
-deallocateCursor
-    : DEALLOCATE ID
-    ;
-
-// ======================================
-// Common Table Expression (CTE)
-// ======================================
-cteStatement
-    : WITH cteDefinition selectStatement
-    ;
-
-cteDefinition
-    : ID (LPAREN columnName (COMMA columnName)* RPAREN)? AS LPAREN selectStatement RPAREN
-    ;
-
-// ======================================
-// Expressions (with precedence)
+// Expressions (precedence-safe)
 // ======================================
 expression
     : logicalExpression
@@ -210,7 +149,7 @@ additiveExpression
     ;
 
 multiplicativeExpression
-    : unaryExpression ((STAR | SLASH | PERCENT) unaryExpression)*
+    : unaryExpression ((STAR | SLASH | PERCENT_OP) unaryExpression)*
     ;
 
 unaryExpression
@@ -220,8 +159,7 @@ unaryExpression
 
 primary
     : literal
-    | columnName
-    | tableName
+    | ID
     | USER_VAR
     | SYSTEM_VAR
     | LPAREN expression RPAREN
@@ -231,12 +169,10 @@ primary
 // Literals
 // ======================================
 literal
-    : INT
-    | DECIMAL
-    | FLOAT
-    | STRING
-    | HEX_STRING
-    | BIT_STRING
+    : INT_LITERAL
+    | DECIMAL_LITERAL
+    | FLOAT_LITERAL
+    | STRING_LITERAL
     | TRUE
     | FALSE
     | NULL
@@ -245,14 +181,10 @@ literal
 // ======================================
 // Identifiers
 // ======================================
-identifier
+tableName
     : ID
     ;
 
-tableName
-    : identifier
-    ;
-
 columnName
-    : identifier
+    : ID
     ;
