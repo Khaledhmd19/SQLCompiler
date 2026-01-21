@@ -13,7 +13,7 @@ public class JoinClause extends ASTNode {
     }
 
     private JoinType joinType = JoinType.INNER;
-    private TableSource table;
+    private Table table;
     private ASTNode onCondition;
 
     public JoinClause() {
@@ -28,12 +28,12 @@ public class JoinClause extends ASTNode {
         return joinType;
     }
 
-    public void setTable(TableSource table) {
+    public void setTable(Table table) {
         this.table = table;
         addChild(table);
     }
 
-    public TableSource getTable() {
+    public Table getTable() {
         return table;
     }
 
@@ -56,7 +56,9 @@ public class JoinClause extends ASTNode {
         StringBuilder sb = new StringBuilder();
         sb.append(joinType.name()).append(" JOIN");
         if (table != null) {
-            sb.append(" ").append(table.getTableName() != null ? table.getTableName().getName() : "");
+            // Table node's toString will be used or we can access its formatted name if
+            // implemented
+            sb.append(" ").append(table.toString());
         }
         return sb.toString();
     }

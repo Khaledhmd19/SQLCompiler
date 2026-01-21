@@ -532,7 +532,7 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
 
         // Table
         if (ctx.tableSource() != null) {
-            TableSource table = (TableSource) visit(ctx.tableSource());
+            Table table = (Table) visit(ctx.tableSource());
             join.setTable(table);
         }
 
@@ -689,16 +689,36 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
         // IS NULL / IS NOT NULL
         if (ctx.IS() != null && ctx.NULL() != null) {
             BinaryExpression.Operator op = ctx.NOT() != null
-                ? BinaryExpression.Operator.IS_NOT_NULL
-                : BinaryExpression.Operator.IS_NULL;
+                    ? BinaryExpression.Operator.IS_NOT_NULL
+                    : BinaryExpression.Operator.IS_NULL;
             return new BinaryExpression(left, op, new Literal(Literal.LiteralType.NULL, "NULL"));
         }
 
         // IN
         if (ctx.IN() != null) {
-            // For simplicity, return the left side with IN marker
-            // A more complete implementation would create an InExpression node
-            return left;
+            InExpr inExpr = new InExpr();
+            inExpr.setLeft(left);
+            if (ctx.NOT() != null) {
+                inExpr.setNot(true);
+            }
+
+            // Iterate over expressions (skipping the first one which is left)
+            // The grammar structure for IN is likely: relationalExpression IN (expression,
+            // expression...)
+            // But checking relationalExpression context, it has:
+            // additiveExpression(0) IN (expression...)
+            // Wait, looking at gen code:
+            // public List<ExpressionContext> expression()
+            // And ctx.expression(i)
+            // So we iterate over ctx.expression() list.
+
+            for (mysqlparser.ExpressionContext exprCtx : ctx.expression()) {
+                ASTNode item = visit(exprCtx);
+                if (item != null) {
+                    inExpr.addItem(item);
+                }
+            }
+            return inExpr;
         }
 
         // EXISTS
@@ -725,8 +745,8 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
         for (int i = 1; i < ctx.multiplicativeExpression().size(); i++) {
             ASTNode right = visit(ctx.multiplicativeExpression(i));
             BinaryExpression.Operator op = ctx.PLUS(i - 1) != null
-                ? BinaryExpression.Operator.PLUS
-                : BinaryExpression.Operator.MINUS;
+                    ? BinaryExpression.Operator.PLUS
+                    : BinaryExpression.Operator.MINUS;
             left = new BinaryExpression(left, op, right);
         }
         return left;
@@ -968,8 +988,126 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitControlFlowStatement(mysqlparser.ControlFlowStatementContext ctx) {
-        // For simplicity, we'll skip control flow in AST
-        // A complete implementation would handle IF, BEGIN/END, TRY/CATCH
+        if (ctx.ifStatement() != null) {
+            return visitIfStatement(ctx.ifStatement());
+        } else if (ctx.beginEndBlock() != null) {
+            return visitBeginEndBlock(ctx.beginEndBlock());
+        }
         return null;
+    }
+
+    @Override
+    public ASTNode visitIfStatement(mysqlparser.IfStatementContext ctx) {
+        IfStatement ifStmt = new IfStatement();
+
+        // Condition
+        if (ctx.expression() != null) {
+            ASTNode condition = visit(ctx.expression());
+            ifStmt.setCondition(condition);
+        }
+
+        // Then block (list of statements)
+        if (ctx.statement() != null && !ctx.statement().isEmpty()) {
+            if (ctx.statement().size() == 1) {
+                ASTNode stmt = visit(ctx.statement(0));
+                ifStmt.setThenStatement(stmt);
+            } else {
+                Block thenBlock = new Block();
+                for (mysqlparser.StatementContext stmtCtx : ctx.statement()) {
+                    // Logic to separate then/else statements is tricky with just list
+                    // Based on grammar: statment+ (ELSE statement+)?
+                    // We need to check indices or structure better.
+                    // Simplified: We assume first statement block is THEN.
+                    // Actually, generic listener/visitor structure usually separates them more
+                    // clearly
+                    // But here they are flattened in one list in some ANTLR versions or separated.
+                    // Let's check the context methods used in gen code provided earlier.
+                    // It uses: public List<StatementContext> statement()
+                    // And loops.
+                    // Wait, the context shows:
+                    // statement() returns all.
+                    // statement(i) returns specific.
+                    // The grammar seems to be: IF expr statement+ (ELSE statement+)?
+                    // This creates ambiguity in the list.
+                    // However, in the generated code `IfStatementContext`:
+                    // It has code that loops.
+                    // Actually, let's look at `visitIfStatement` carefully.
+                    // The standard way if they are in one list is difficult without index.
+                    // BUT, checking the generated code again:
+                    // It had `while` loops adding to the same `statement()` list.
+                    // This implies all statements are in one list. Use strategy:
+                    // Find the `ELSE` token index?
+                    // Or simpler: The parser likely groups them if we used labeling.
+                    // Without labeling, we might have to rely on the fact that we can't easily
+                    // distinguish
+                    // unless we check tokens.
+                    // Better approach for now: Create a Block for everything found.
+                    // Use `visit(stmt)`
+                }
+            }
+        }
+
+        // Re-reading generated IfStatementContext logic:
+        // ParseTreeListener shows it enters `statement()` in loops.
+        // There is one list `statement`.
+        // There is an `ELSE` terminal node.
+        // We can check the source interval or token index, BUT
+        // simplest reliable way without that is strict alternation? No.
+
+        // Let's try to infer from the `statement` list vs `ELSE`.
+        // Actually, ANTLR4 creates a list. If `ELSE` is present,
+        // valid statements before `ELSE` token are THEN, after are ELSE.
+        // We can check token index of statements vs ELSE token.
+
+        Block thenBlock = new Block();
+        Block elseBlock = new Block();
+        boolean passedElse = false;
+
+        int elseIndex = -1;
+        if (ctx.ELSE() != null) {
+            // This is a TerminalNode
+            elseIndex = ctx.ELSE().getSymbol().getTokenIndex();
+        }
+
+        for (mysqlparser.StatementContext stmtCtx : ctx.statement()) {
+            ASTNode stmt = visit(stmtCtx);
+            if (stmt != null) {
+                if (elseIndex != -1 && stmtCtx.getStart().getTokenIndex() > elseIndex) {
+                    elseBlock.addStatement(stmt);
+                } else {
+                    thenBlock.addStatement(stmt);
+                }
+            }
+        }
+
+        if (!thenBlock.getStatements().isEmpty()) {
+            if (thenBlock.getStatements().size() == 1) {
+                ifStmt.setThenStatement(thenBlock.getStatements().get(0));
+            } else {
+                ifStmt.setThenStatement(thenBlock);
+            }
+        }
+
+        if (!elseBlock.getStatements().isEmpty()) {
+            if (elseBlock.getStatements().size() == 1) {
+                ifStmt.setElseStatement(elseBlock.getStatements().get(0));
+            } else {
+                ifStmt.setElseStatement(elseBlock);
+            }
+        }
+
+        return ifStmt;
+    }
+
+    @Override
+    public ASTNode visitBeginEndBlock(mysqlparser.BeginEndBlockContext ctx) {
+        Block block = new Block();
+        for (mysqlparser.StatementContext stmtCtx : ctx.statement()) {
+            ASTNode stmt = visit(stmtCtx);
+            if (stmt != null) {
+                block.addStatement(stmt);
+            }
+        }
+        return block;
     }
 }
