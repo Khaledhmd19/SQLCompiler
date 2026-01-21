@@ -1,0 +1,670 @@
+// Generated from src/mysqlparser.g4 by ANTLR 4.13.2
+package parser;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+
+/**
+ * This interface defines a complete listener for a parse tree produced by
+ * {@link mysqlparser}.
+ */
+public interface mysqlparserListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#sqlFile}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlFile(mysqlparser.SqlFileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#sqlFile}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlFile(mysqlparser.SqlFileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(mysqlparser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(mysqlparser.StatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#setStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetStatement(mysqlparser.SetStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#setStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetStatement(mysqlparser.SetStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#execStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecStatement(mysqlparser.ExecStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#execStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecStatement(mysqlparser.ExecStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#useStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterUseStatement(mysqlparser.UseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#useStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitUseStatement(mysqlparser.UseStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#controlFlowStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterControlFlowStatement(mysqlparser.ControlFlowStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#controlFlowStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitControlFlowStatement(mysqlparser.ControlFlowStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(mysqlparser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(mysqlparser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#beginEndBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeginEndBlock(mysqlparser.BeginEndBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#beginEndBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeginEndBlock(mysqlparser.BeginEndBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#tryCatchBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterTryCatchBlock(mysqlparser.TryCatchBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#tryCatchBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitTryCatchBlock(mysqlparser.TryCatchBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#dmlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDmlStatement(mysqlparser.DmlStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#dmlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDmlStatement(mysqlparser.DmlStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#selectStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectStatement(mysqlparser.SelectStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#selectStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectStatement(mysqlparser.SelectStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#selectClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectClause(mysqlparser.SelectClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#selectClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectClause(mysqlparser.SelectClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#selectList}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectList(mysqlparser.SelectListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#selectList}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectList(mysqlparser.SelectListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#selectItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectItem(mysqlparser.SelectItemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#selectItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectItem(mysqlparser.SelectItemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#alias}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlias(mysqlparser.AliasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#alias}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlias(mysqlparser.AliasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#fromClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterFromClause(mysqlparser.FromClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#fromClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitFromClause(mysqlparser.FromClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#tableSource}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableSource(mysqlparser.TableSourceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#tableSource}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableSource(mysqlparser.TableSourceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoinClause(mysqlparser.JoinClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoinClause(mysqlparser.JoinClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#joinType}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoinType(mysqlparser.JoinTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#joinType}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoinType(mysqlparser.JoinTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#whereClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhereClause(mysqlparser.WhereClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#whereClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhereClause(mysqlparser.WhereClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#groupByClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroupByClause(mysqlparser.GroupByClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#groupByClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroupByClause(mysqlparser.GroupByClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#havingClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterHavingClause(mysqlparser.HavingClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#havingClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitHavingClause(mysqlparser.HavingClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#orderByClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrderByClause(mysqlparser.OrderByClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#orderByClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrderByClause(mysqlparser.OrderByClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#orderByItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrderByItem(mysqlparser.OrderByItemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#orderByItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrderByItem(mysqlparser.OrderByItemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#insertStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterInsertStatement(mysqlparser.InsertStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#insertStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitInsertStatement(mysqlparser.InsertStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#valueRow}.
+	 * @param ctx the parse tree
+	 */
+	void enterValueRow(mysqlparser.ValueRowContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#valueRow}.
+	 * @param ctx the parse tree
+	 */
+	void exitValueRow(mysqlparser.ValueRowContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#updateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterUpdateStatement(mysqlparser.UpdateStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#updateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitUpdateStatement(mysqlparser.UpdateStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment(mysqlparser.AssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment(mysqlparser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#deleteStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeleteStatement(mysqlparser.DeleteStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#deleteStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeleteStatement(mysqlparser.DeleteStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#truncateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTruncateStatement(mysqlparser.TruncateStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#truncateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTruncateStatement(mysqlparser.TruncateStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#mergeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMergeStatement(mysqlparser.MergeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#mergeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMergeStatement(mysqlparser.MergeStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#ddlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdlStatement(mysqlparser.DdlStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#ddlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdlStatement(mysqlparser.DdlStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#createStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateStatement(mysqlparser.CreateStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#createStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateStatement(mysqlparser.CreateStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#tableElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableElement(mysqlparser.TableElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#tableElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableElement(mysqlparser.TableElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#tableConstraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableConstraint(mysqlparser.TableConstraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#tableConstraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableConstraint(mysqlparser.TableConstraintContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#alterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterStatement(mysqlparser.AlterStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#alterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterStatement(mysqlparser.AlterStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#alterAction}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterAction(mysqlparser.AlterActionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#alterAction}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterAction(mysqlparser.AlterActionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#dropStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropStatement(mysqlparser.DropStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#dropStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropStatement(mysqlparser.DropStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#renameStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRenameStatement(mysqlparser.RenameStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#renameStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRenameStatement(mysqlparser.RenameStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#columnDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumnDef(mysqlparser.ColumnDefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#columnDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumnDef(mysqlparser.ColumnDefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#dataType}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataType(mysqlparser.DataTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#dataType}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataType(mysqlparser.DataTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#identitySpec}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentitySpec(mysqlparser.IdentitySpecContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#identitySpec}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentitySpec(mysqlparser.IdentitySpecContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#columnConstraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumnConstraint(mysqlparser.ColumnConstraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#columnConstraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumnConstraint(mysqlparser.ColumnConstraintContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#cursorStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCursorStatement(mysqlparser.CursorStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#cursorStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCursorStatement(mysqlparser.CursorStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#declareStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareStatement(mysqlparser.DeclareStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#declareStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareStatement(mysqlparser.DeclareStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#openCursor}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpenCursor(mysqlparser.OpenCursorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#openCursor}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpenCursor(mysqlparser.OpenCursorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#fetchCursor}.
+	 * @param ctx the parse tree
+	 */
+	void enterFetchCursor(mysqlparser.FetchCursorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#fetchCursor}.
+	 * @param ctx the parse tree
+	 */
+	void exitFetchCursor(mysqlparser.FetchCursorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#closeCursor}.
+	 * @param ctx the parse tree
+	 */
+	void enterCloseCursor(mysqlparser.CloseCursorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#closeCursor}.
+	 * @param ctx the parse tree
+	 */
+	void exitCloseCursor(mysqlparser.CloseCursorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#deallocateCursor}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeallocateCursor(mysqlparser.DeallocateCursorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#deallocateCursor}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeallocateCursor(mysqlparser.DeallocateCursorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#cteStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCteStatement(mysqlparser.CteStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#cteStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCteStatement(mysqlparser.CteStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#cteDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterCteDefinition(mysqlparser.CteDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#cteDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitCteDefinition(mysqlparser.CteDefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(mysqlparser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(mysqlparser.ExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#logicalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicalExpression(mysqlparser.LogicalExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#logicalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicalExpression(mysqlparser.LogicalExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#relationalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterRelationalExpression(mysqlparser.RelationalExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#relationalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitRelationalExpression(mysqlparser.RelationalExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#additiveExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdditiveExpression(mysqlparser.AdditiveExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#additiveExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdditiveExpression(mysqlparser.AdditiveExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#multiplicativeExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultiplicativeExpression(mysqlparser.MultiplicativeExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#multiplicativeExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultiplicativeExpression(mysqlparser.MultiplicativeExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#unaryExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryExpression(mysqlparser.UnaryExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#unaryExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryExpression(mysqlparser.UnaryExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimary(mysqlparser.PrimaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimary(mysqlparser.PrimaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#aggregateFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregateFunction(mysqlparser.AggregateFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#aggregateFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregateFunction(mysqlparser.AggregateFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#identifierOrFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierOrFunction(mysqlparser.IdentifierOrFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#identifierOrFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierOrFunction(mysqlparser.IdentifierOrFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#caseExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCaseExpression(mysqlparser.CaseExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#caseExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCaseExpression(mysqlparser.CaseExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#whenClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhenClause(mysqlparser.WhenClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#whenClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhenClause(mysqlparser.WhenClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteral(mysqlparser.LiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteral(mysqlparser.LiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(mysqlparser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(mysqlparser.IdentifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#tableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableName(mysqlparser.TableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#tableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableName(mysqlparser.TableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link mysqlparser#columnName}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumnName(mysqlparser.ColumnNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mysqlparser#columnName}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumnName(mysqlparser.ColumnNameContext ctx);
+}

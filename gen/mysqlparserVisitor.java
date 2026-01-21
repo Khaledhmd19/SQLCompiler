@@ -1,4 +1,4 @@
-// Generated from C:/Users/KMHam/IdeaProjects/sql_compiler_lexer/src/mysqlparser.g4 by ANTLR 4.13.2
+// Generated from src/mysqlparser.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -21,6 +21,42 @@ public interface mysqlparserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatement(mysqlparser.StatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#setStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetStatement(mysqlparser.SetStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#execStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecStatement(mysqlparser.ExecStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#controlFlowStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitControlFlowStatement(mysqlparser.ControlFlowStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#ifStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStatement(mysqlparser.IfStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#beginEndBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeginEndBlock(mysqlparser.BeginEndBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#tryCatchBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTryCatchBlock(mysqlparser.TryCatchBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link mysqlparser#dmlStatement}.
 	 * @param ctx the parse tree
@@ -166,17 +202,23 @@ public interface mysqlparserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDataType(mysqlparser.DataTypeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link mysqlparser#columnConstraint}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumnConstraint(mysqlparser.ColumnConstraintContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link mysqlparser#cursorStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCursorStatement(mysqlparser.CursorStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link mysqlparser#declareCursor}.
+	 * Visit a parse tree produced by {@link mysqlparser#declareStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclareCursor(mysqlparser.DeclareCursorContext ctx);
+	T visitDeclareStatement(mysqlparser.DeclareStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link mysqlparser#openCursor}.
 	 * @param ctx the parse tree
@@ -256,11 +298,29 @@ public interface mysqlparserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrimary(mysqlparser.PrimaryContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link mysqlparser#caseExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCaseExpression(mysqlparser.CaseExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#whenClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhenClause(mysqlparser.WhenClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link mysqlparser#literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLiteral(mysqlparser.LiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link mysqlparser#identifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier(mysqlparser.IdentifierContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link mysqlparser#tableName}.
 	 * @param ctx the parse tree

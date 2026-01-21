@@ -75,6 +75,10 @@ UNIQUE      : U N I Q U E;
 CONSTRAINT  : C O N S T R A I N T;
 REFERENCES  : R E F E R E N C E S;
 DATABASE    : D A T A B A S E;
+DEFAULT     : D E F A U L T;
+KEY         : K E Y;
+CLUSTERED   : C L U S T E R E D;
+NONCLUSTERED: N O N C L U S T E R E D;
 
 // Joins
 INNER       : I N N E R;
@@ -100,6 +104,7 @@ WITH        : W I T H;
 AND         : A N D;
 OR          : O R;
 NOT         : N O T;
+IS          : I S;
 TRUE        : T R U E;
 FALSE       : F A L S E;
 NULL        : N U L L;
@@ -120,9 +125,20 @@ ASC         : A S C;
 DESC        : D E S C;
 USING        : U S I N G;
 MATCHED        : M A T C H E D;
-ADD        : A D D;
-TO        : T O;
-FOR        : F O R;
+ADD         : A D D;
+TO          : T O;
+FOR         : F O R;
+IF          : I F;
+BEGIN       : B E G I N;
+GO          : G O;
+TRY         : T R Y;
+CATCH       : C A T C H;
+EXEC        : E X E C;
+EXECUTE     : E X E C U T E;
+RETURN      : R E T U R N;
+PRINT       : P R I N T;
+USE         : U S E;
+IDENTITY    : I D E N T I T Y;
 
 
 // Aggregates / Functions
@@ -141,6 +157,10 @@ ASSIGN      : ':=';
 COMMA       : ',';
 CONCAT      : '||';
 DOT         : '.';
+PLUS_EQ     : '+=';
+MINUS_EQ    : '-=';
+STAR_EQ     : '*=';
+SLASH_EQ    : '/=';
 EQ          : '=';
 NEQ         : '<>' | '!=';
 GT          : '>';
@@ -187,7 +207,7 @@ DECIMAL : DIGIT+ '.' DIGIT+;
 FLOAT : DIGIT+ ('.' DIGIT+)? [eE] [+-]? DIGIT+;
 
 STRING
-    : '\'' ( '\'\'' | ~'\'' )* '\''
+    : N? '\'' ( '\'\'' | ~'\'' )* '\''  // supports both 'string' and N'unicode string'
     ;
 
 
