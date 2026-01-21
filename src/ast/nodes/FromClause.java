@@ -10,18 +10,18 @@ import java.util.ArrayList;
  */
 public class FromClause extends ASTNode {
 
-    private List<TableSource> tables = new ArrayList<>();
+    private List<Table> tables = new ArrayList<>();
 
     public FromClause() {
         super();
     }
 
-    public void addTable(TableSource table) {
+    public void addTable(Table table) {
         tables.add(table);
         addChild(table);
     }
 
-    public List<TableSource> getTables() {
+    public List<Table> getTables() {
         return tables;
     }
 

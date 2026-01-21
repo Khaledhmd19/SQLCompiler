@@ -484,7 +484,7 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
         FromClause fromClause = new FromClause();
 
         for (mysqlparser.TableSourceContext srcCtx : ctx.tableSource()) {
-            TableSource table = (TableSource) visit(srcCtx);
+            Table table = (Table) visit(srcCtx);
             if (table != null) {
                 fromClause.addTable(table);
             }
@@ -495,19 +495,19 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitTableSource(mysqlparser.TableSourceContext ctx) {
-        TableSource tableSource = new TableSource();
+        Table table = new Table();
 
         if (ctx.tableName() != null) {
             Identifier tableName = visitTableName(ctx.tableName());
-            tableSource.setTableName(tableName);
+            table.setTableName(tableName);
         }
 
+        // TODO: Handle table aliases if needed
         if (ctx.identifier() != null) {
-            Identifier alias = new Identifier(ctx.identifier().getText());
-            tableSource.setAlias(alias);
+            // Table aliases can be added as needed
         }
 
-        return tableSource;
+        return table;
     }
 
     @Override
@@ -652,6 +652,19 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
     public ASTNode visitRelationalExpression(mysqlparser.RelationalExpressionContext ctx) {
         ASTNode left = visit(ctx.additiveExpression(0));
 
+        // LIKE (check first before other comparisons)
+        if (ctx.LIKE() != null && ctx.additiveExpression().size() > 1) {
+            ASTNode right = visit(ctx.additiveExpression(1));
+            LikeExpr likeExpr = new LikeExpr();
+            likeExpr.setLeft(left);
+            likeExpr.setRight(right);
+            if (ctx.NOT() != null) {
+                return new UnaryExpression(UnaryExpression.Operator.NOT, likeExpr);
+            }
+            return likeExpr;
+        }
+
+        // Comparison operators (=, <>, <, <=, >, >=)
         if (ctx.additiveExpression().size() > 1) {
             ASTNode right = visit(ctx.additiveExpression(1));
             BinaryExpression.Operator op = BinaryExpression.Operator.EQUALS;
@@ -679,18 +692,6 @@ public class ASTBuilderVisitor extends mysqlparserBaseVisitor<ASTNode> {
                 ? BinaryExpression.Operator.IS_NOT_NULL
                 : BinaryExpression.Operator.IS_NULL;
             return new BinaryExpression(left, op, new Literal(Literal.LiteralType.NULL, "NULL"));
-        }
-
-        // LIKE
-        if (ctx.LIKE() != null && ctx.additiveExpression().size() > 1) {
-            ASTNode right = visit(ctx.additiveExpression(1));
-            LikeExpr likeExpr = new LikeExpr();
-            likeExpr.setLeft(left);
-            likeExpr.setRight(right);
-            if (ctx.NOT() != null) {
-                return new UnaryExpression(UnaryExpression.Operator.NOT, likeExpr);
-            }
-            return likeExpr;
         }
 
         // IN
